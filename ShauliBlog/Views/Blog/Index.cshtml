@@ -14,11 +14,12 @@
                 <header>
                     <h2>@post.Headline</h2>
                     <p>Posted on <time datetime="2009-06-29T23:31+01:00">@post.Timestamp</time> by <a href="@post.Website">@post.Author</a> - <a href="#comments @post.Id">
-    @{if (post.Comments != null)
-    {@post.Comments.Count}
-    else
-    { <label>0</label> }} comments
-                </a></p>
+                    @{if (post.Comments != null)
+                    {@post.Comments.Count}
+                    else
+                    { <label>0</label> }} comments
+                </a>
+                </p>
                 </header>
                 <div>
 
@@ -73,22 +74,22 @@
             <h4>Add your comment:</h4>
             <hr>
             <div class="form-group">
-                <input value="@post.Id" data-val="true" id="PostId" name="PostId" type="hidden">
+                <input value="@post.Id" data-val="true" id="PostId" name="PostId" type="hidden" />
             </div>
 
             <div class="form-group">
                 <label class="control-label col-md-2" for="Headline">Headline</label>
-                 <input class="text-box single-line" data-val="true" id="Headline" name="Headline" type="text" required>
+                <input class="text-box single-line" data-val="true" id="Headline" name="Headline" type="text" required />
             </div>
 
             <div class="form-group">
                 <label class="control-label col-md-2" for="Author">Author</label>
-                <input type="text" id="Author" name="Author" class="text-box single-line" required>
+                <input type="text" id="Author" name="Author" class="text-box single-line" required />
             </div>
 
             <div class="form-group">
                 <label class="control-label col-md-2" for="Website">Author's website</label>
-                <input type="text" class="text-box single-line" id="Website" name="Website" required>
+                <input type="text" class="text-box single-line" id="Website" name="Website" required />
             </div>
 
             <div class="form-group">
@@ -98,7 +99,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default">
+                    <input type="submit" value="Create" class="btn btn-default" />
                 </div>
             </div>
         </div>
