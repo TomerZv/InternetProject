@@ -1,0 +1,128 @@
+﻿@model ShauliBlog.Models.BlogPosts
+
+@{
+    ViewBag.Title = "Blog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="mainContent">
+    @{
+    foreach(ShauliBlog.Models.Post post in Model.Posts)
+    {
+        <section>
+            <article class="blogPost">
+                <header>
+                    <h2>@post.Headline</h2>
+                    <p>Posted on <time datetime="2009-06-29T23:31+01:00">@post.Timestamp</time> by <a href="@post.Website">@post.Author</a> - <a href="#comments @post.Id">
+    @{if (post.Comments != null)
+    {@post.Comments.Count}
+    else
+    { <label>0</label> }} comments
+                </a></p>
+                </header>
+                <div>
+
+                    @{ 
+                        if (File.Exists(Server.MapPath("~/Uploads/" + post.Id + ".png"))) {
+                        <img src="~/Uploads/@(post.Id).png" />
+                        }
+                    }
+
+            
+                    @{
+                        foreach (string par in @post.Content.Split(Environment.NewLine.ToArray(), StringSplitOptions.RemoveEmptyEntries))
+                        {
+                            <p>@par</p>
+                        }
+                        
+                    }
+               
+                    @{ 
+                        if (File.Exists(Server.MapPath("~/Uploads/" + post.Id + ".mp4"))) {
+                        <video controls="controls">
+                            <source src="~Uploads/@(post.Id).mp4" type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                       }
+                    }
+
+                </div>
+            </article>
+        </section>
+        <section id="comments @post.Id" class="comments">
+            <h3>Comments</h3>
+            @{
+                if (post.Comments != null)
+                { 
+                    foreach(ShauliBlog.Models.Comment currComment in post.Comments) 
+                    {
+                        <article>
+                            <header>
+                           <!--    <h4>currComment.Headline</h4> -->
+                                <a href="@currComment.Website">@currComment.Author</a> on <time datetime="2009-06-29T23:35:20+01:00">@currComment.Timestamp</time>
+                            </header>
+                            <p>@currComment.Content</p>
+
+                        </article>
+                    }
+                }
+            }        
+        </section>
+        using (Html.BeginForm("Create", "Comments", FormMethod.Post))
+        {           
+            @Html.AntiForgeryToken()
+        
+            <div class="form-horizontal">
+                <h4>Add your comment:</h4>
+                <hr />
+                @Html.ValidationSummary(true)
+                
+                <div class="form-group">
+                    @Html.HiddenFor(model => model.Comment.PostId, new { Value = post.Id })               
+                </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Comment.Headline, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Comment.Headline)
+                    @Html.ValidationMessageFor(model => model.Comment.Headline)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Comment.Author, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Comment.Author)
+                    @Html.ValidationMessageFor(model => model.Comment.Author)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Comment.Website, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Comment.Website)
+                    @Html.ValidationMessageFor(model => model.Comment.Website)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Comment.Content, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Comment.Content)
+                    @Html.ValidationMessageFor(model => model.Comment.Content)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+        }
+
+
+    } //end of posts foreach
+}
+</div>
+

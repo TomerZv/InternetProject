@@ -1,0 +1,59 @@
+﻿@model ShauliBlog.Models.Post
+
+@{
+    ViewBag.Title = "Post Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div class="mainDiv">
+    <h4>Post</h4>
+	<hr />
+    <section>
+        <article class="blogPost">
+            <header>
+                <h2>@Model.Headline</h2>
+                <p>
+                    Posted on <time datetime="2009-06-29T23:31+01:00">@Model.Timestamp</time> by <a href="@Model.Website">@Model.Author</a> - <a href="#comments">
+                        @{if (Model.Comments != null)
+                        {@Model.Comments.Count}
+                        else
+                        { <label>0</label> }} comments
+                    </a>
+                </p>
+            </header>
+            <div>
+
+                @{ if (File.Exists(Server.MapPath("~/Uploads/" + Model.Id + ".png")))
+                 {
+                    <img src="~/Uploads/@(Model.Id).png" />
+                 }
+                }
+
+
+                @{
+                    foreach (string par in @Model.Content.Split(Environment.NewLine.ToArray()))
+                    {
+                        <p>@par</p>
+                    }
+
+                }
+
+                @{ if (File.Exists(Server.MapPath("~/Uploads/" + Model.Id + ".mp4")))
+                 {
+                    <video controls="controls">
+                        <source src="~Uploads/@(Model.Id).mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                 }
+                }
+
+            </div>
+        </article>
+    </section>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
