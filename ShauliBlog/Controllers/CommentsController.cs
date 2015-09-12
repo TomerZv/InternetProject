@@ -53,20 +53,17 @@ namespace ShauliBlog.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+//        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include="Id,PostId,Headline,Author,Website,Timestamp,Content")] Comment comment)
         {
             if (ModelState.IsValid)
             {
                 comment.Timestamp = DateTime.Now;
                 db.Comments.Add(comment);
-                db.SaveChanges();
-              //  return RedirectToAction(Url.Action("Index") + "#comments " + comment.PostId,"Blog");
-                return Redirect(Url.RouteUrl(new { controller = "Blog", action = "Index" }) + "#comments " + comment.PostId);
+                db.SaveChanges();          
             }
 
-            ViewBag.PostId = new SelectList(db.Posts, "Id", "Headline", comment.PostId);
-            return View(comment);
+            return Redirect(Url.RouteUrl(new { controller = "Blog", action = "Index" }) + "#comments " + comment.PostId);
         }
 
         // GET: /Comments/Edit/5

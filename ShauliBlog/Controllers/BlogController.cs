@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace ShauliBlog.Controllers
 {
@@ -14,16 +15,10 @@ namespace ShauliBlog.Controllers
         // GET: Blog
         public ActionResult Index()
         {
-            // fix this
-            BlogPosts blog = new BlogPosts();
-            
-            List<Post> posts = db.Posts.ToList();
+            List<Post> posts = db.Posts.Include(post => post.Comments).ToList();
             posts.Sort();
-            blog.Posts = posts;
 
-            blog.Comment = new Comment();
-
-            return View(blog);
+            return View(posts);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model ShauliBlog.Models.BlogPosts
+﻿@model List<ShauliBlog.Models.Post>
 
 @{
     ViewBag.Title = "Blog";
@@ -7,7 +7,7 @@
 
 <div id="mainContent">
     @{
-    foreach(ShauliBlog.Models.Post post in Model.Posts)
+    foreach(ShauliBlog.Models.Post post in Model)
     {
         <section>
             <article class="blogPost">
@@ -68,58 +68,41 @@
                 }
             }        
         </section>
-        using (Html.BeginForm("Create", "Comments", FormMethod.Post))
-        {           
-            @Html.AntiForgeryToken()
-        
-            <div class="form-horizontal">
-                <h4>Add your comment:</h4>
-                <hr />
-                @Html.ValidationSummary(true)
-                
-                <div class="form-group">
-                    @Html.HiddenFor(model => model.Comment.PostId, new { Value = post.Id })               
-                </div>
-
+    <form action="/Comments/Create" method="post">
+        <div class="form-horizontal">
+            <h4>Add your comment:</h4>
+            <hr>
             <div class="form-group">
-                @Html.LabelFor(model => model.Comment.Headline, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Comment.Headline)
-                    @Html.ValidationMessageFor(model => model.Comment.Headline)
-                </div>
+                <input value="@post.Id" data-val="true" id="PostId" name="PostId" type="hidden">
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Comment.Author, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Comment.Author)
-                    @Html.ValidationMessageFor(model => model.Comment.Author)
-                </div>
+                <label class="control-label col-md-2" for="Headline">Headline</label>
+                 <input class="text-box single-line" data-val="true" id="Headline" name="Headline" type="text" required>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Comment.Website, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Comment.Website)
-                    @Html.ValidationMessageFor(model => model.Comment.Website)
-                </div>
+                <label class="control-label col-md-2" for="Author">Author</label>
+                <input type="text" id="Author" name="Author" class="text-box single-line" required>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Comment.Content, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Comment.Content)
-                    @Html.ValidationMessageFor(model => model.Comment.Content)
-                </div>
+                <label class="control-label col-md-2" for="Website">Author's website</label>
+                <input type="text" class="text-box single-line" id="Website" name="Website" required>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="Content">Content</label>
+                <textarea id="Content" name="Content" class="text-box multi-line" required></textarea>
             </div>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="submit" value="Create" class="btn btn-default">
                 </div>
             </div>
         </div>
-        }
+    </form>
 
 
     } //end of posts foreach

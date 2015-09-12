@@ -35,7 +35,7 @@ namespace ShauliBlog.Models
         public string Content { get; set; }
 
         [Display(Name = "Post comments")]
-        public virtual List<Comment> Comments{ get; set; }
+        public List<Comment> Comments{ get; set; }
 
         public int CompareTo(Post other)
         {
