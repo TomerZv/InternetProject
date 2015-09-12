@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using ShauliBlog.Models;
 using System.IO;
+using System.Globalization;
+using System.Web.Routing;
 
 namespace ShauliBlog.Controllers
 {
@@ -130,6 +132,44 @@ namespace ShauliBlog.Controllers
             db.Posts.Remove(post);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Search(int? id, string author, string text, string postedAfter, string postedBefore)
+        {
+            List<Post> results = db.Posts.ToList();
+            DateTime date;
+
+            // Checks whether to filter by id
+            if (id.HasValue)
+            {
+                results = results.Where(post => post.Id == id.Value).ToList();
+            }
+
+            // Checks whether to filter by author
+            if (author != null)
+            {
+                results = results.Where(post => post.Author.Contains(author)).ToList();
+            }
+
+            // Checks whether to filter by some sort of text
+            if (text != null)
+            {
+                results = results.Where(post => post.Headline.Contains(text) || post.Content.Contains(text)).ToList();
+            }
+
+            if (postedAfter != null && DateTime.TryParseExact(postedAfter, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+            {
+                results = results.Where(post => post.Timestamp > date).ToList();
+            }
+
+            if (postedBefore != null && DateTime.TryParseExact(postedBefore, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+            {
+                results = results.Where(post => post.Timestamp < date).ToList();
+            }
+
+            results.Sort();
+
+            return View("../Blog/Index", results);
         }
 
         protected override void Dispose(bool disposing)

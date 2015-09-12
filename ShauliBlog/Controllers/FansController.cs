@@ -115,6 +115,42 @@ namespace ShauliBlog.Controllers
             return RedirectToAction("Index");
         }
 
+        //public ActionResult Search(int? id, string firstName, string lastName, int? seniority, string bornBefore, string bornAfter)
+        //{
+        //    List<Fan> results = db.Fans.ToList();
+        //    DateTime date;
+
+        //    // Checks whether to filter by id
+        //    if (id.HasValue)
+        //    {
+        //        results = results.Where(fan => fan.Id == id.Value).ToList();
+        //    }
+
+        //    // Checks whether to filter by author
+        //    if (author != null)
+        //    {
+        //        results = results.Where(fan => fan.Author.Contains(author)).ToList();
+        //    }
+
+        //    // Checks whether to filter by some sort of text
+        //    if (text != null)
+        //    {
+        //        results = results.Where(fan => fan.Headline.Contains(text) || fan.Content.Contains(text)).ToList();
+        //    }
+
+        //    if (fanedAfter != null && DateTime.TryParseExact(fanedAfter, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+        //    {
+        //        results = results.Where(fan => fan.Timestamp > date).ToList();
+        //    }
+
+        //    if (fanedBefore != null && DateTime.TryParseExact(fanedBefore, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+        //    {
+        //        results = results.Where(fan => fan.Timestamp < date).ToList();
+        //    }
+
+        //    return View("Index", results);
+        //}
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

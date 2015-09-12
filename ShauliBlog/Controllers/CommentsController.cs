@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ShauliBlog.Models;
+using System.Globalization;
 
 namespace ShauliBlog.Controllers
 {
@@ -123,6 +124,42 @@ namespace ShauliBlog.Controllers
             db.Comments.Remove(comment);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Search(int? id, string author, string text, string postedAfter, string postedBefore)
+        {
+            List<Comment> results = db.Comments.ToList();
+            DateTime date;
+
+            // Checks whether to filter by id
+            if (id.HasValue)
+            {
+                results = results.Where(comment => comment.Id == id.Value).ToList();
+            }
+
+            // Checks whether to filter by author
+            if (author != null)
+            {
+                results = results.Where(comment => comment.Author.Contains(author)).ToList();
+            }
+
+            // Checks whether to filter by some sort of text
+            if (text != null)
+            {
+                results = results.Where(comment => comment.Headline.Contains(text) || comment.Content.Contains(text)).ToList();
+            }
+
+            if (postedAfter != null && DateTime.TryParseExact(postedAfter, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+            {
+                results = results.Where(comment => comment.Timestamp > date).ToList();
+            }
+
+            if (postedBefore != null && DateTime.TryParseExact(postedBefore, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+            {
+                results = results.Where(comment => comment.Timestamp < date).ToList();
+            }
+
+            return View("Results", results);
         }
 
         protected override void Dispose(bool disposing)
