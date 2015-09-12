@@ -14,6 +14,7 @@ namespace ShauliBlog.Controllers
         // GET: Blog
         public ActionResult Index()
         {
+            // fix this
             BlogPosts blog = new BlogPosts();
             
             List<Post> posts = db.Posts.ToList();
