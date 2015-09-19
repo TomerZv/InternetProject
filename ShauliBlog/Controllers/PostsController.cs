@@ -136,7 +136,7 @@ namespace ShauliBlog.Controllers
 
         public ActionResult Search(int? id, string author, string text, string postedAfter, string postedBefore)
         {
-            List<Post> results = db.Posts.ToList();
+            List<Post> results = db.Posts.Include(post => post.Comments).ToList();
             DateTime date;
 
             // Checks whether to filter by id
