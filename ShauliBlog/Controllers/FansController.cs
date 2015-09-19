@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ShauliBlog.Models;
+using System.Globalization;
 
 namespace ShauliBlog.Controllers
 {
@@ -113,6 +114,48 @@ namespace ShauliBlog.Controllers
             db.Fans.Remove(fan);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Search(int? id, string firstName, string lastName, int? seniority, string bornBefore, string bornAfter)
+        {
+            List<Fan> results = db.Fans.ToList();
+            DateTime date;
+
+            // Checks whether to filter by id
+            if (id.HasValue)
+            {
+                results = results.Where(fan => fan.Id == id.Value).ToList();
+            }
+
+            // Checks whether to filter by firstname
+            if (!string.IsNullOrWhiteSpace(firstName))
+            {
+                results = results.Where(fan => fan.FirstName == firstName).ToList();
+            }
+
+            // Checks whether to filter by lastname
+            if (!string.IsNullOrWhiteSpace(lastName))
+            {
+                results = results.Where(fan => fan.LastName == lastName).ToList();
+            }
+
+            // Checks whether to filter by seniority
+            if (seniority.HasValue)
+            {
+                results = results.Where(fan => fan.Seniority == seniority.Value).ToList();
+            }
+
+            if (bornAfter != null && DateTime.TryParseExact(bornAfter, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+            {
+                results = results.Where(fan => fan.DateOfBirth > date).ToList();
+            }
+
+            if (bornBefore != null && DateTime.TryParseExact(bornBefore, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+            {
+                results = results.Where(fan => fan.DateOfBirth < date).ToList();
+            }
+
+            return View("Results", results);
         }
 
         protected override void Dispose(bool disposing)
