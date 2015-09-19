@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ShauliBlog.Models;
+using System.Globalization;
 
 namespace ShauliBlog.Controllers
 {
@@ -115,41 +116,47 @@ namespace ShauliBlog.Controllers
             return RedirectToAction("Index");
         }
 
-        //public ActionResult Search(int? id, string firstName, string lastName, int? seniority, string bornBefore, string bornAfter)
-        //{
-        //    List<Fan> results = db.Fans.ToList();
-        //    DateTime date;
+        public ActionResult Search(int? id, string firstName, string lastName, int? seniority, string bornBefore, string bornAfter)
+        {
+            List<Fan> results = db.Fans.ToList();
+            DateTime date;
 
-        //    // Checks whether to filter by id
-        //    if (id.HasValue)
-        //    {
-        //        results = results.Where(fan => fan.Id == id.Value).ToList();
-        //    }
+            // Checks whether to filter by id
+            if (id.HasValue)
+            {
+                results = results.Where(fan => fan.Id == id.Value).ToList();
+            }
 
-        //    // Checks whether to filter by author
-        //    if (author != null)
-        //    {
-        //        results = results.Where(fan => fan.Author.Contains(author)).ToList();
-        //    }
+            // Checks whether to filter by firstname
+            if (!string.IsNullOrWhiteSpace(firstName))
+            {
+                results = results.Where(fan => fan.FirstName == firstName).ToList();
+            }
 
-        //    // Checks whether to filter by some sort of text
-        //    if (text != null)
-        //    {
-        //        results = results.Where(fan => fan.Headline.Contains(text) || fan.Content.Contains(text)).ToList();
-        //    }
+            // Checks whether to filter by lastname
+            if (!string.IsNullOrWhiteSpace(lastName))
+            {
+                results = results.Where(fan => fan.LastName == lastName).ToList();
+            }
 
-        //    if (fanedAfter != null && DateTime.TryParseExact(fanedAfter, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
-        //    {
-        //        results = results.Where(fan => fan.Timestamp > date).ToList();
-        //    }
+            // Checks whether to filter by seniority
+            if (seniority.HasValue)
+            {
+                results = results.Where(fan => fan.Seniority == seniority.Value).ToList();
+            }
 
-        //    if (fanedBefore != null && DateTime.TryParseExact(fanedBefore, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
-        //    {
-        //        results = results.Where(fan => fan.Timestamp < date).ToList();
-        //    }
+            if (bornAfter != null && DateTime.TryParseExact(bornAfter, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+            {
+                results = results.Where(fan => fan.DateOfBirth > date).ToList();
+            }
 
-        //    return View("Index", results);
-        //}
+            if (bornBefore != null && DateTime.TryParseExact(bornBefore, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+            {
+                results = results.Where(fan => fan.DateOfBirth < date).ToList();
+            }
+
+            return View("Results", results);
+        }
 
         protected override void Dispose(bool disposing)
         {

@@ -146,23 +146,25 @@ namespace ShauliBlog.Controllers
             }
 
             // Checks whether to filter by author
-            if (author != null)
+            if (!string.IsNullOrWhiteSpace(author))
             {
                 results = results.Where(post => post.Author.Contains(author)).ToList();
             }
 
             // Checks whether to filter by some sort of text
-            if (text != null)
+            if (!string.IsNullOrWhiteSpace(text))
             {
                 results = results.Where(post => post.Headline.Contains(text) || post.Content.Contains(text)).ToList();
             }
 
-            if (postedAfter != null && DateTime.TryParseExact(postedAfter, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+            // Checks whether to get posts posted after a certain date
+            if (postedAfter != null && DateTime.TryParseExact(postedAfter, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
             {
                 results = results.Where(post => post.Timestamp > date).ToList();
             }
 
-            if (postedBefore != null && DateTime.TryParseExact(postedBefore, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+            // Checks whether to get posts posted before a certain date
+            if (postedBefore != null && DateTime.TryParseExact(postedBefore, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
             {
                 results = results.Where(post => post.Timestamp < date).ToList();
             }
