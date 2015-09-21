@@ -419,3 +419,7 @@ footer {
     float: left;
     margin-top: 3pt;
 }
+
+.login {
+    float: right;
+}

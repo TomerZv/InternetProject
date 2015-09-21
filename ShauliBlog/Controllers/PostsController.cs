@@ -13,6 +13,7 @@ using System.Web.Routing;
 
 namespace ShauliBlog.Controllers
 {
+    [Authorize]
     public class PostsController : Controller
     {
         private BlogDb db = new BlogDb();
