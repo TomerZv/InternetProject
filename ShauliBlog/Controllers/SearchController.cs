@@ -52,5 +52,23 @@ namespace ShauliBlog.Controllers
                 return View("../Blog/Index", posts); 
             }
         }
+
+        public ActionResult GetPostsByCategory(int category)
+        {
+            Category cat = (Category)category;
+
+            var posts = db.Posts.ToList();
+
+            // Gets the posts by category
+            var postsByCategory =
+              from post in posts
+              group post by post.Category into g
+              select new { Category = g.Key, Posts = g.ToList() };
+
+            // Gets only the posts of the requested category
+            posts = postsByCategory.Where(c => c.Category == cat).First().Posts;
+
+            return View("../Blog/Index", posts);
+        }
     }
 }

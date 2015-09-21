@@ -6,6 +6,13 @@ using System.Web;
 
 namespace ShauliBlog.Models
 {
+    public enum Category
+    {
+        Sport,
+        Blog,
+        News,
+        Entertainment
+    }
     public class Post : IComparable<Post>
     {
         [Key]
@@ -36,6 +43,8 @@ namespace ShauliBlog.Models
 
         [Display(Name = "Post comments")]
         public List<Comment> Comments{ get; set; }
+
+        public Category Category { get; set; }
 
         public int CompareTo(Post other)
         {
