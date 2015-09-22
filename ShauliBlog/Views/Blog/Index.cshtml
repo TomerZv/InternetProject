@@ -7,106 +7,98 @@
 
 <div id="mainContent">
     @{
-    foreach(ShauliBlog.Models.Post post in Model)
-    {
-        <section>
-            <article class="blogPost">
-                <header>
-                    <h2>@post.Headline</h2>
-                    <p>Posted on <time datetime="2009-06-29T23:31+01:00">@post.Timestamp</time> by <a href="@post.Website">@post.Author</a> - <a href="#comments @post.Id">
-                    @{if (post.Comments != null)
-                    {@post.Comments.Count}
-                    else
-                    { <label>0</label> }} comments
-                </a>
-                </p>
-                </header>
-                <div>
-
-                    @{ 
-                        if (File.Exists(Server.MapPath("~/Uploads/" + post.Id + ".png"))) {
-                        <img src="~/Uploads/@(post.Id).png" />
-                        }
-                    }
-
-            
+        foreach (ShauliBlog.Models.Post post in Model)
+        {
+            <section>
+                <article class="blogPost">
+                    <header>
+                        <h2>@post.Headline</h2>
+                        <p>
+                            Posted on <time datetime="2009-06-29T23:31+01:00">@post.Timestamp</time> by <a href="@post.Website">@post.Author</a> - <a href="#comments @post.Id">
+                                @{if (post.Comments != null)
+                                {@post.Comments.Count}
+                                else
+                                { <label>0</label> }} comments
+                            </a>
+                        </p>
+                    </header>
+                    <div>
+                        @post.Content
+                    </div>
                     @{
-                        foreach (string par in @post.Content.Split(Environment.NewLine.ToArray(), StringSplitOptions.RemoveEmptyEntries))
-                        {
-                            <p>@par</p>
-                        }
-                        
-                    }
-               
-                    @{ 
-                        if (File.Exists(Server.MapPath("~/Uploads/" + post.Id + ".mp4"))) {
-                        <video controls="controls">
-                            <source src="~Uploads/@(post.Id).mp4" type="video/mp4" />
-                            Your browser does not support the video tag.
-                        </video>
-                       }
+            if (File.Exists(Server.MapPath("~/Uploads/" + post.Id + ".png")))
+            {
+                <img src="~/Uploads/@(post.Id).png" />
+            }
                     }
 
-                </div>
-            </article>
-        </section>
-        <section id="comments @post.Id" class="comments">
-            <h3>Comments</h3>
-            @{
-                if (post.Comments != null)
-                { 
-                    foreach(ShauliBlog.Models.Comment currComment in post.Comments) 
-                    {
-                        <article>
-                            <header>
-                           <!--    <h4>currComment.Headline</h4> -->
-                                <a href="@currComment.Website">@currComment.Author</a> on <time datetime="2009-06-29T23:35:20+01:00">@currComment.Timestamp</time>
-                            </header>
-                            <p>@currComment.Content</p>
-
-                        </article>
+                    @{
+            if (File.Exists(Server.MapPath("~/Uploads/" + post.Id + ".mp4")))
+            {
+                <video controls="controls">
+                    <source src="~Uploads/@(post.Id).mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            }
                     }
+                </article>
+            </section>
+            <section id="comments @post.Id" class="comments">
+                <h3>Comments</h3>
+                @{
+            if (post.Comments != null)
+            {
+                foreach (ShauliBlog.Models.Comment currComment in post.Comments)
+                {
+                    <article>
+                        <header>
+                            <!--    <h4>currComment.Headline</h4> -->
+                            <a href="@currComment.Website">@currComment.Author</a> on <time datetime="2009-06-29T23:35:20+01:00">@currComment.Timestamp</time>
+                        </header>
+                        <p>@currComment.Content</p>
+
+                    </article>
                 }
-            }        
-        </section>
-    <form action="/Comments/Create" method="post">
-        <div class="form-horizontal">
-            <h4>Add your comment:</h4>
-            <hr>
-            <div class="form-group">
-                <input value="@post.Id" data-val="true" id="PostId" name="PostId" type="hidden" />
-            </div>
+            }
+                }
+            </section>
+            <form action="/Comments/Create" method="post">
+                <div class="form-horizontal">
+                    <h4>Add your comment:</h4>
+                    <hr>
+                    <div class="form-group">
+                        <input value="@post.Id" data-val="true" id="PostId" name="PostId" type="hidden" />
+                    </div>
 
-            <div class="form-group">
-                <label class="control-label col-md-2" for="Headline">Headline</label>
-                <input class="text-box single-line" data-val="true" id="Headline" name="Headline" type="text" required />
-            </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="Headline">Headline</label>
+                        <input class="text-box single-line" data-val="true" id="Headline" name="Headline" type="text" required />
+                    </div>
 
-            <div class="form-group">
-                <label class="control-label col-md-2" for="Author">Author</label>
-                <input type="text" id="Author" name="Author" class="text-box single-line" required />
-            </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="Author">Author</label>
+                        <input type="text" id="Author" name="Author" class="text-box single-line" required />
+                    </div>
 
-            <div class="form-group">
-                <label class="control-label col-md-2" for="Website">Author's website</label>
-                <input type="text" class="text-box single-line" id="Website" name="Website" required />
-            </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="Website">Author's website</label>
+                        <input type="text" class="text-box single-line" id="Website" name="Website" required />
+                    </div>
 
-            <div class="form-group">
-                <label class="control-label col-md-2" for="Content">Content</label>
-                <textarea id="Content" name="Content" class="text-box multi-line" required></textarea>
-            </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="Content">Content</label>
+                        <textarea id="Content" name="Content" class="text-box multi-line" required></textarea>
+                    </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-default" />
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </form>
+            </form>
 
 
-    } //end of posts foreach
-}
+        } //end of posts foreach
+    }
 </div>
-

@@ -229,13 +229,18 @@ aside {
     }
 
 .blogPost div {
-    /* Column-count not implemented yet */
-    -moz-column-count: 2;
-    -webkit-column-count: 2;
-    /* Column-gap not implemented yet */
-    -moz-column-gap: 22px;
+    -webkit-column-count: 3; /* Chrome, Safari, Opera */
+    -moz-column-count: 3; /* Firefox */
+    column-count: 3;    -moz-column-count: 2;
+    -webkit-column-gap: 40px; /* Chrome, Safari, Opera */
+    -moz-column-gap: 40px; /* Firefox */
+    column-gap: 40px;
     -webkit-column-gap: 22px;
     font-family: myFont;
+        -webkit-column-rule: 1px solid lightblue; /* Chrome, Safari, Opera */
+    -moz-column-rule: 1px solid lightblue; /* Firefox */
+    column-rule: 1px solid lightblue;
+    width: 30%;
 }
 
 .blogPost img {
