@@ -6,7 +6,7 @@
     <title>@ViewBag.Title</title>
     <link href="~/Content/Blog.css" rel="stylesheet" type="text/css" media="screen" />
     <script src="~/Scripts/jquery-1.10.2.js"></script>
-    <script src="~/Scripts/site.js"></script>
+    <script src="~/Scripts/blog.js"></script>
     <script type="text/javascript">
     $(document).ready(function () {
         var canvas = document.getElementById("canvas");
@@ -34,12 +34,12 @@
         <nav>
             <!-- Navigation -->
             <ul>
-                <li class="selected">@Html.ActionLink("Blog", "Index", "Blog")</li>
-                <li>@Html.ActionLink("Mangement", "Index", "Posts")</li>
-                <li>@Html.ActionLink("Fan Club", "Index", "Fans")</li>
-                <li>@Html.ActionLink("Search", "Index", "Search")</li>
+                @{string currentController = ViewContext.RouteData.Values["controller"].ToString();}
+                <li class="@(currentController == "Blog" ? "selected" : "")">@Html.ActionLink("Blog", "Index", "Blog")</li>
+                <li class="@(currentController == "Posts" || currentController == "Account" || currentController == "Comments" ? "selected" : "")">@Html.ActionLink("Mangement", "Index", "Posts")</li>
+                <li class="@(currentController == "Fans" ? "selected" : "")">@Html.ActionLink("Fan Club", "Index", "Fans")</li>
+                <li class="@(currentController == "Search" ? "selected" : "")">@Html.ActionLink("Search", "Index", "Search")</li>
                 <li><a href="#">Contact</a></li>
-
                 <li class="subscribe"><img src="~/Content/Images/rss.png" /><a href="#">Subscribe via. RSS</a></li>
             </ul>
         </nav>

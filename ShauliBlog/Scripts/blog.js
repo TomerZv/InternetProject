@@ -1,6 +1,6 @@
-﻿$(document).ready(function () {
+﻿$(document).ready(function() {
 
-    $('.addCommentForm').submit(function(e){
+    $('.addCommentForm').submit(function(e) {
 
         var currComment = JSON.stringify({
             'PostId': $(this).find('#PostId').val(),
@@ -30,15 +30,16 @@
                             "</article>";
 
             $("section[id='comments " + response.PostId + "']").append(newComment);
-        });
 
-        $(this).find('#Headline').val('');
-        $(this).find('#Author').val('');
-        $(this).find('#Website').val('');
-        $(this).find('#Content').val('');
+            ClearCommentForm();
+        });
 
         e.preventDefault();
     });
-    
 
+    function ClearCommentForm() {
+        $('.addCommentForm input[type=text]').val('');
+        $('.addCommentForm textarea').val('');
+    }
+    
 });
