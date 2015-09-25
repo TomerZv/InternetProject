@@ -44,7 +44,6 @@
                 </article>
             </section>
             <section id="comments @post.Id" class="comments">
-                <h3>Comments</h3>
                 @{
             if (post.Comments != null)
             {
@@ -62,7 +61,7 @@
             }
                 }
             </section>
-            <form action="/Comments/Create" method="post">
+            <form method="post" class="addCommentForm">
                 <div class="form-horizontal">
                     <h4>Add your comment:</h4>
                     <hr>

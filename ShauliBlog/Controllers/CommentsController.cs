@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ShauliBlog.Models;
 using System.Globalization;
+using System.Web.Script.Serialization;
 
 namespace ShauliBlog.Controllers
 {
@@ -54,7 +55,6 @@ namespace ShauliBlog.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-//        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include="Id,PostId,Headline,Author,Website,Timestamp,Content")] Comment comment)
         {
             if (ModelState.IsValid)
@@ -64,7 +64,9 @@ namespace ShauliBlog.Controllers
                 db.SaveChanges();          
             }
 
-            return Redirect(Url.RouteUrl(new { controller = "Blog", action = "Index" }) + "#comments " + comment.PostId);
+            return Json(comment);
+
+            // return Redirect(Url.RouteUrl(new { controller = "Blog", action = "Index" }) + "#comments " + comment.PostId);
         }
 
         // GET: /Comments/Edit/5
