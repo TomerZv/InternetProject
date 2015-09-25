@@ -24,6 +24,11 @@ namespace ShauliBlog.Controllers
             return View(db.Posts.ToList());
         }
 
+        public ActionResult Get()
+        {
+            return Json(db.Posts.ToList());
+        }
+
         // GET: /Posts/Details/5
         public ActionResult Details(int? id)
         {
