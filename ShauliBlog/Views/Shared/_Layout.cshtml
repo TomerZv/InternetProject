@@ -7,6 +7,7 @@
     <link href="~/Content/Blog.css" rel="stylesheet" type="text/css" media="screen" />
     <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script src="~/Scripts/blog.js"></script>
+    <script src="~/Scripts/subscribe.js"></script>
     <script type="text/javascript">
     $(document).ready(function () {
         var canvas = document.getElementById("canvas");
@@ -40,7 +41,7 @@
                 <li class="@(currentController == "Fans" ? "selected" : "")">@Html.ActionLink("Fan Club", "Index", "Fans")</li>
                 <li class="@(currentController == "Search" ? "selected" : "")">@Html.ActionLink("Search", "Index", "Search")</li>
                 <li><a href="#">Contact</a></li>
-                <li class="subscribe"><img src="~/Content/Images/rss.png" /><a href="#">Subscribe via. RSS</a></li>
+                <li class="subscribe"><img src="~/Content/Images/rss.png" /><a href="/Subscribe">Subscribe via Mail</a></li>
             </ul>
         </nav>
         <section id="intro">
