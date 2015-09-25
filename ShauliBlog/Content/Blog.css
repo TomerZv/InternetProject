@@ -66,7 +66,6 @@ nav {
 
             nav ul li a {
                 display: block;
-                margin-right: 20px;
                 width: 140px;
                 font-size: 14px;
                 line-height: 44px;
@@ -427,4 +426,11 @@ footer {
 
 .login {
     float: right;
+}
+
+#canvas
+{
+    background-color: yellow;
+    border-radius: 10px;
+    padding: 2px;
 }
