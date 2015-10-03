@@ -9,7 +9,7 @@
     @{
         foreach (ShauliBlog.Models.Post post in Model)
         {
-            <section>
+            <section id="post @post.Id">
                 <article class="blogPost">
                     <header>
                         <h2>@post.Headline</h2>
