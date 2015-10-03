@@ -37,19 +37,6 @@
         </section>
         <div id="content">
             @RenderBody()
-            <aside>
-                <section>
-                    <header>
-                        <h3>@Html.ActionLink("Categories", "Categories", "Statistics")</h3>
-                    </header>
-                    <ul>
-                        <li>@Html.ActionLink("Sport", "GetPostsByCategory", "Search", new { category = (int)ShauliBlog.Models.Category.Sport }, null)</li>
-                        <li>@Html.ActionLink("Blog", "GetPostsByCategory", "Search", new { category = (int)ShauliBlog.Models.Category.Blog }, null)</li>
-                        <li>@Html.ActionLink("News", "GetPostsByCategory", "Search", new { category = (int)ShauliBlog.Models.Category.News }, null)</li>
-                        <li>@Html.ActionLink("Entertainment", "GetPostsByCategory", "Search", new { category = (int)ShauliBlog.Models.Category.Entertainment }, null)</li>
-                    </ul>
-                </section>
-            </aside>
         </div>
         <footer>
             <!-- Footer -->
