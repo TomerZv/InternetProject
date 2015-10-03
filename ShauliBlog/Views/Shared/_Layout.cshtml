@@ -40,7 +40,7 @@
                 <li class="@(currentController == "Posts" || currentController == "Account" || currentController == "Comments" ? "selected" : "")">@Html.ActionLink("Mangement", "Index", "Posts")</li>
                 <li class="@(currentController == "Fans" ? "selected" : "")">@Html.ActionLink("Fan Club", "Index", "Fans")</li>
                 <li class="@(currentController == "Search" ? "selected" : "")">@Html.ActionLink("Search", "Index", "Search")</li>
-                <li><a href="#">Contact</a></li>
+                <li class="@(currentController == "Statistics" ? "selected" : "")">@Html.ActionLink("Statistics", "PopularPosts", "Statistics")</li>
                 <li class="subscribe"><img src="~/Content/Images/rss.png" /><a href="/Subscribe">Subscribe via Mail</a></li>
             </ul>
         </nav>
@@ -58,24 +58,13 @@
             <aside>
                 <section>
                     <header>
-                        <h3>Categories</h3>
+                        <h3>@Html.ActionLink("Categories", "Categories", "Statistics")</h3>
                     </header>
                     <ul>
                         <li>@Html.ActionLink("Sport", "GetPostsByCategory", "Search", new { category = (int)ShauliBlog.Models.Category.Sport }, null)</li>
                         <li>@Html.ActionLink("Blog", "GetPostsByCategory", "Search", new { category = (int)ShauliBlog.Models.Category.Blog }, null)</li>
                         <li>@Html.ActionLink("News", "GetPostsByCategory", "Search", new { category = (int)ShauliBlog.Models.Category.News }, null)</li>
                         <li>@Html.ActionLink("Entertainment", "GetPostsByCategory", "Search", new { category = (int)ShauliBlog.Models.Category.Entertainment }, null)</li>
-                    </ul>
-                </section>
-                <section>
-                    <header>
-                        <h3>Archives</h3>
-                    </header>
-                    <ul>
-                        <li><a href="#">December 2008</a></li>
-                        <li><a href="#">January 2009</a></li>
-                        <li><a href="#">February 2009</a></li>
-                        <li><a href="#">March 2009</a></li>
                     </ul>
                 </section>
             </aside>
@@ -87,16 +76,7 @@
                     <header>
                         <h3>About</h3>
                     </header>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut la</p>
-                </section>
-                <section id="blogroll">
-                    <header>
-                        <h3>Blogroll</h3>
-                    </header>
-                    <ul>
-                        <li><a href="#">NETTUTS+</a></li>
-                        <li><a href="#">FreelanceSwitch</a></li>
-                    </ul>
+                    <p>This is a blog of the parlament!</p>
                 </section>
                 <section id="popular">
                     <header>

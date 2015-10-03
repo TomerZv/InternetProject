@@ -24,7 +24,7 @@ var tip = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-10, 0])
   .html(function (d) {
-      return "<strong>Posts:</strong> <span style='color:red'>" + d.Posts + "</span>";
+      return "<strong>Comments:</strong> <span style='color:red'>" + d.CommentsCount + "</span>";
   })
 
 var svg = d3.select(".body").append("svg")
@@ -36,12 +36,12 @@ var svg = d3.select(".body").append("svg")
 svg.call(tip);
 
 $.ajax({
-    url: '/statistics/PublicityDivisionByCategory',
+    url: '/statistics/GetPopularComments',
     type: 'POST',
     contentType: 'application/json',
-}).done(function (categories) {
-    x.domain(categories.map(function (d) { return d.Category; }));
-    y.domain([0, d3.max(categories, function (d) { return d.Posts; })]);
+}).done(function (posts) {
+    x.domain(posts.map(function (d) { return d.Post; }));
+    y.domain([0, d3.max(posts, function (d) { return d.CommentsCount; })]);
 
     svg.append("g")
         .attr("class", "x axis")
@@ -59,13 +59,13 @@ $.ajax({
         .text("Posts");
 
     svg.selectAll(".bar")
-        .data(categories)
+        .data(posts)
       .enter().append("rect")
         .attr("class", "bar")
-        .attr("x", function (d) { return x(d.Category); })
+        .attr("x", function (d) { return x(d.Post); })
         .attr("width", x.rangeBand())
-        .attr("y", function (d) { return y(d.Posts); })
-        .attr("height", function (d) { return height - y(d.Posts); })
+        .attr("y", function (d) { return y(d.CommentsCount); })
+        .attr("height", function (d) { return height - y(d.CommentsCount); })
         .on('mouseover', tip.show)
         .on('mouseout', tip.hide);
 });
