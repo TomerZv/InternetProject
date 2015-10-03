@@ -220,7 +220,7 @@ aside {
 
 @font-face {
     font-family: myFont;
-    src: url(~\fonts\Artifika-Regular.ttf);
+    src: url('Fonts/Artifika-Regular.ttf')
 }
 
 .blogPost header p, .blogPost header p a {
