@@ -1,5 +1,5 @@
 ﻿function VideoCheckbox() {
-    if (document.getElementById('video_checkbox').checked) {
+    if ($('#video_checkbox').is(':checked')) {
         $("#video").removeAttr('disabled');
     }
     else {
@@ -9,7 +9,7 @@
 }
 
 function ImageCheckbox() {
-    if (document.getElementById('image_checkbox').checked) {
+    if ($('#image_checkbox').is(':checked')) {
         $("#image").removeAttr('disabled');
     }
     else {
