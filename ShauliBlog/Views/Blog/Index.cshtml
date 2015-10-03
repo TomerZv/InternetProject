@@ -13,6 +13,7 @@
                 <article class="blogPost">
                     <header>
                         <h2>@post.Headline</h2>
+                        <p>Category: @Html.ActionLink(post.Category.ToString(), "GetPostsByCategory", "Search", new { category = (int)post.Category }, null)</p>
                         <p>
                             Posted on <time datetime="2009-06-29T23:31+01:00">@post.Timestamp</time> by <a href="@post.Website">@post.Author</a> - <a href="#comments @post.Id">
                                 @{if (post.Comments != null)

@@ -55,7 +55,7 @@ namespace ShauliBlog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,Headline,Author,Website,Timestamp,Content")] Post post, HttpPostedFileBase picture, HttpPostedFileBase video)
+        public ActionResult Create([Bind(Include = "Id,Headline,Author,Website,Timestamp,Content,Category")] Post post, HttpPostedFileBase picture, HttpPostedFileBase video)
         {
             if (ModelState.IsValid)
             {
@@ -103,11 +103,12 @@ namespace ShauliBlog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,Headline,Author,Website,Timestamp,Content")] Post post)
+        public ActionResult Edit([Bind(Include="Id,Headline,Author,Website,Timestamp,Content,Category")] Post post)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(post).State = EntityState.Modified;
+                db.Entry(post).Property("Timestamp").IsModified = false;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
