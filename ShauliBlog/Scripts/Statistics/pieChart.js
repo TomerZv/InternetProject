@@ -4,7 +4,7 @@
         radius = Math.min(width, height) / 2;
 
     var color = d3.scale.ordinal()
-        .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b"]);
+        .range(["#ffbf00", "#cc5500", "#d2691e", "#ff3800"]);
 
     var arc = d3.svg.arc()
         .outerRadius(radius - 10)
