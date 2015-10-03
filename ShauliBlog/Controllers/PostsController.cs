@@ -36,7 +36,9 @@ namespace ShauliBlog.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Post post = db.Posts.Find(id);
+            
+            Post post = db.Posts.Include(currPost => currPost.Comments).Where(currPost => currPost.Id == id).FirstOrDefault();
+
             if (post == null)
             {
                 return HttpNotFound();

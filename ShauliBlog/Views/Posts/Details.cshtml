@@ -17,12 +17,12 @@
                 <p>
                     <p>Category: @Html.ActionLink(Model.Category.ToString(), "GetPostsByCategory", "Search", new { category = (int)Model.Category }, null)</p>
                     <p>
-                        Posted on <time datetime="2009-06-29T23:31+01:00">@Model.Timestamp</time> by <a href="@Model.Website">@Model.Author</a> - <a href="#comments">
+                        Posted on <time datetime="2009-06-29T23:31+01:00">@Model.Timestamp</time> by <a href="@Model.Website">@Model.Author</a> - 
                             @{if (Model.Comments != null)
                             {@Model.Comments.Count}
                             else
                             { <label>0</label> }} comments
-                        </a>
+                        
                     </p>
                 </p>
             </header>
