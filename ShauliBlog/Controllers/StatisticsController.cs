@@ -51,7 +51,8 @@ namespace ShauliBlog.Controllers
                            select new
                            {
                                Post = post.Headline + " by " + post.Author,
-                               CommentsCount = postComments.Count()
+                               CommentsCount = postComments.Count(),
+                               Id = post.Id
                            });
 
             // Gets the top 5 posts.
