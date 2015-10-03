@@ -252,6 +252,8 @@ aside {
 .blogPost img {
     margin: 22px 0;
     -webkit-box-shadow: 3px 3px 7px #777;
+    width: 285px;
+    height: 210px;
 }
 
 .blogPost video {
