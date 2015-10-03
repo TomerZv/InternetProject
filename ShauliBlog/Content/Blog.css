@@ -13,6 +13,13 @@ header, footer, section, aside, nav, article {
     display: block;
 }
 
+    header form {
+    margin-top: 5px;
+    padding-top: 5px;
+    border-top: 0px;
+
+    }
+
     header h1 {
         text-shadow: 3px 3px #DDDDDD;
     }

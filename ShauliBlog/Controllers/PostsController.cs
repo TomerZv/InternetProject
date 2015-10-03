@@ -59,7 +59,7 @@ namespace ShauliBlog.Controllers
         {
             if (ModelState.IsValid)
             {
-                post.Timestamp = DateTime.Now.Date;
+                post.Timestamp = DateTime.Now;
                 db.Posts.Add(post);
                 db.SaveChanges();
 
