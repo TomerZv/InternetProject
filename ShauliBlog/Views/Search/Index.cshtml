@@ -3,30 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(".forms").hide();
-        $("#posts").show();
-
-        $("#formSelector").change(function () {
-            $(".forms").hide();
-
-            var option = $(this).find('option:selected').val();
-            $("#" + option).show();
-        });
-    });
-
-    function SeniorityCheckbox() {
-        if (document.getElementById('seniority_checkbox').checked) {
-            $("#seniority").removeAttr('disabled');
-            $("#volume").val($("#seniority").val());
-        }
-        else {
-            $("#seniority").attr('disabled', 'disabled');
-            $("#volume").val("");
-        }
-    }
-</script>
+<script src="~/Scripts/Search/index.js"></script>
 
 <h2>Search</h2>
 
@@ -58,16 +35,6 @@ Please choose which of the following are you willing to search :
             <label for="postedAfter">Posted After:</label>
             <input type="date" name="postedAfter">
         </p>
-        @*<p>
-                <label for="numOfComments">NumOfComments</label>
-                <input name="numOfComments" type="range" min=0 max=10 value=0 step=1 oninput="outputUpdate(value)">
-                <output id=volume> 0 </output>
-                <script>
-                    function outputUpdate(vol) {
-                        document.querySelector('#volume').value = vol;
-                    }
-                </script>
-            </p>*@
 
         <input type="submit" value="Search">
     }

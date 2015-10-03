@@ -195,6 +195,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\BarChart.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Fans.css" />
@@ -203,6 +204,7 @@
     <Content Include="Content\Images\intro_shauli.png" />
     <Content Include="Content\Images\rss.png" />
     <Content Include="Content\Blog.css" />
+    <Content Include="Content\PieChart.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -221,9 +223,12 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\pieChart.js" />
+    <Content Include="Scripts\Posts\create.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\blog.js" />
+    <Content Include="Scripts\Search\index.js" />
+    <Content Include="Scripts\Shared\layout.js" />
     <Content Include="Scripts\subscribe.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
@@ -269,7 +274,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\" />
-    <Folder Include="Views\FanClub\" />
     <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
