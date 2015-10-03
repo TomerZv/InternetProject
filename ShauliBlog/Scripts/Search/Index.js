@@ -11,7 +11,7 @@
 });
 
 function SeniorityCheckbox() {
-    if (document.getElementById('seniority_checkbox').checked) {
+    if ($('#seniority_checkbox').is(':checked')) {
         $("#seniority").removeAttr('disabled');
         $("#volume").val($("#seniority").val());
     }
