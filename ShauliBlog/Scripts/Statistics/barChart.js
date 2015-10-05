@@ -69,6 +69,7 @@
             .attr("y", function (d) { return y(d.CommentsCount); })
             .attr("height", function (d) { return height - y(d.CommentsCount); })
             .on('mouseover', tip.show)
-            .on('mouseout', tip.hide);
+            .on('mouseout', tip.hide)
+            .on('click', function (d) { window.location = '/#post ' + d.Id; })
     });
 });

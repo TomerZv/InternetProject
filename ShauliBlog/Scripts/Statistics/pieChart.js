@@ -38,7 +38,8 @@
             .attr("d", arc)
             .style("fill", function (d) {
                 return color(d.data.Category);
-            });
+            })
+            .on('click', function (d) { window.location = "/Search/GetPostsByCategory?category=" + d.data.Id; });
 
         g.append("text")
             .attr("transform", function (d) { return "translate(" + arc.centroid(d) + ")"; })

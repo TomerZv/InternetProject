@@ -35,7 +35,9 @@ namespace ShauliBlog.Controllers
             var postsByCategory =
               from post in posts
               group post by post.Category into g
-              select new { Category = g.Key.ToString(), Posts = g.ToList().Count() };
+              select new { Category = g.Key.ToString() + " - " + g.ToList().Count().ToString(), 
+                           Posts = g.ToList().Count(),
+                           Id = (int)g.Key};
 
             return Json(postsByCategory.ToList());
         }
