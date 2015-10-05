@@ -91,12 +91,7 @@ Please choose which of the following are you willing to search :
             <input id="seniority_checkbox" type="checkbox" class="checkbox" onclick="SeniorityCheckbox()" checked />
             <label for="seniority">Seniority</label>
             <input id="seniority" name="seniority" type="range" min=1 max=10 value=1 step=1 oninput="outputUpdate(value)">
-            <output id=volume> 1 </output>
-            <script>
-                function outputUpdate(vol) {
-                    document.querySelector('#volume').value = vol;
-                }
-            </script>
+            <output id=volume class="fanInput"> 1 </output>
         </p>
         <input type="submit" value="Search" onclick="return ValidateInput('fanInput', 'any')">
     }

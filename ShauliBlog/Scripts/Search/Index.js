@@ -23,6 +23,10 @@ function SeniorityCheckbox() {
     }
 }
 
+function outputUpdate(vol) {
+    document.querySelector('#volume').value = vol;
+}
+
 function ValidateInput(className, allOrAny)
 {
     var isEmpty = true;
