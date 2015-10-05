@@ -21,7 +21,10 @@ namespace ShauliBlog.Controllers
         // GET: /Posts/
         public ActionResult Index()
         {
-            return View(db.Posts.ToList());
+            List<Post> posts = db.Posts.ToList();
+            posts.Sort();
+
+            return View(posts);
         }
 
         public ActionResult Get()
@@ -74,7 +77,7 @@ namespace ShauliBlog.Controllers
                 if (video != null && video.ContentLength > 0)
                 {
                     string fileName = post.Id + ".mp4";
-                    picture.SaveAs(Server.MapPath("~/Uploads/" + fileName));
+                    video.SaveAs(Server.MapPath("~/Uploads/" + fileName));
                 }
                 
  
