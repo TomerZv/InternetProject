@@ -24,7 +24,7 @@ namespace ShauliBlog.Models
 
         [Display(Name = "Date of Birth")]
 
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
 

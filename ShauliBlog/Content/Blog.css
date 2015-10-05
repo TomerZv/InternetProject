@@ -322,7 +322,6 @@ form {
 
     form label {
         display: table-cell;
-        width: 140px;
         padding-right: 20px;
         text-align: right;
         font-weight: bold;
