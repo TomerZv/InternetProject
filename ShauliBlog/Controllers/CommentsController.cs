@@ -123,9 +123,13 @@ namespace ShauliBlog.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Comment comment = db.Comments.Find(id);
+
+            int postId = comment.PostId;
+
             db.Comments.Remove(comment);
             db.SaveChanges();
-            return RedirectToAction("Index");
+
+            return RedirectToAction("Index", new { id = postId });
         }
 
         public ActionResult Search(int? id, string author, string text, string postedAfter, string postedBefore)

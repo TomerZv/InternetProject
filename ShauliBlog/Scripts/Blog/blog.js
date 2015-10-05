@@ -23,13 +23,16 @@
            
             var newComment ="<article> " +
                                 "<header>" +
-                               //   "<h4>" + response.Headline + "</h4>"  +
-                                    "<a href=\"" + response.Website + "\">" + response.Author + "</a> on <time>" + date + "</time>" +
+                                    "<a href=\"" + response.Website + "\">" + response.Headline + " by " + response.Author + "</a> on <time>" + date + "</time>" +
                                  "</header>" +
                                  "<p>" + response.Content + "</p>" +
                             "</article>";
 
             $("section[id='comments " + response.PostId + "']").append(newComment);
+
+            var currentCounter = parseInt($('label[id="commentCounter ' + response.PostId + '"]').text(), 10);
+            currentCounter++;
+            $('label[id="commentCounter ' + response.PostId + '"]').text(currentCounter);
 
             ClearCommentForm();
         });

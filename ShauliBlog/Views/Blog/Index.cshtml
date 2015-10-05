@@ -19,9 +19,9 @@
                         <p>
                             Posted on <time datetime="2009-06-29T23:31+01:00">@post.Timestamp</time> by <a href="@post.Website">@post.Author</a> - <a href="#comments @post.Id">
                                 @{if (post.Comments != null)
-                                {@post.Comments.Count}
-                                else
-                                { <label>0</label> }} comments
+                                {<label id="commentCounter @post.Id">@post.Comments.Count</label>}
+                                  else
+                                  { <label id="commentCounter @post.Id">0</label> }} comments
                             </a>
                         </p>
                     </header>
@@ -54,8 +54,7 @@
                 {
                     <article>
                         <header>
-                            <!--    <h4>currComment.Headline</h4> -->
-                            <a href="@currComment.Website">@currComment.Author</a> on <time datetime="2009-06-29T23:35:20+01:00">@currComment.Timestamp</time>
+                            <a href="@currComment.Website">@currComment.Headline by @currComment.Author</a> on <time datetime="2009-06-29T23:35:20+01:00">@currComment.Timestamp</time>
                         </header>
                         <p>@currComment.Content</p>
 
@@ -101,7 +100,7 @@
             </form>
 
 
-        } //end of posts foreach
+        } 
     }
 </div>
 
