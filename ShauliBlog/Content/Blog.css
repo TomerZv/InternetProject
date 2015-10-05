@@ -246,7 +246,6 @@ aside {
         -webkit-column-rule: 1px solid lightblue; /* Chrome, Safari, Opera */
     -moz-column-rule: 1px solid lightblue; /* Firefox */
     column-rule: 1px solid lightblue;
-    width: 30%;
 }
 
 .blogPost img {
